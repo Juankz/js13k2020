@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Where is Lily?</title>
+    <script src="https://js13kgames.com/webxr-src/2020/aframe.js"></script>
+    <script src="./geometries.js"></script>
+    <script src="./components.js"></script>
+  </head>
+  <body>
+    <div class="device-selector"></div>
+    <a-scene level-generator>
+      <a-plane width="100" height="100" rotation="-90 0 0" material="color: grey" shadow="cast: false, receive: true"></a-plane>
+      <a-sky color="black"></a-sky>
+      <a-entity light="type: ambient; color: #333"></a-entity>
+      <a-entity position="-6.5 0 -2">
+        <a-box height="3" width="2" depth="2" position="0 1.5 0"></a-box>
+        <a-entity light="type: spot; angle: 20; color: red; castShadow: true" rotation="-30 180 0" position="0 2 1.4"></a-entity>z
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
