@@ -1,11 +1,23 @@
 <html>
   <head>
     <meta name="monetization" content="$ilp.uphold.com/3wafYxRePpyi">
-    <title>Looking for Ned</title>
+    <title>Rescuing Ned</title>
     <script src="https://js13kgames.com/webxr-src/2020/aframe.js"></script>
     <script src="./index.js"></script>
   </head>
   <body>
     <div class="device-selector"></div>
+    <a-scene game-manager level-generator>
+      <a-assets>
+        <a-mixin id="floorMaterial" material="color: cyan"></a-mixin>
+      </a-assets>
+      <a-plane width="100" height="100" rotation="-90 0 0" texture-material="texture: floor; repeat: 100 100"></a-plane>
+      <a-entity id="rig" position="0 0 0">
+        <a-entity id="camera" position="0 1.6 0" camera look-controls="pointerLockEnabled:true">
+          <a-cursor id="cursor"></a-cursor>
+        </a-entity>
+      </a-entity>
+      <a-sky color="#222"></a-sky>
+    </a-scene>
   </body>
 </html>
