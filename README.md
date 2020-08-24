@@ -9,7 +9,7 @@ A Web VR game for js13kgames 2020
 Run `npm install` on a terminal
 
 ### Development
-Run `npm start` to start a development server on localhost:8080 and listen to code changes.
+Run `npm start` to start a development server on `localhost:8080` and listen to code changes.
 
 ### Production
 Use `npm run build` to create minified files and zip them. The result will be available at the `build` directory. 
