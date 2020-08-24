@@ -1,4 +1,4 @@
-# Searching for Ned
+# Js13k2020
 
 A Web VR game for js13kgames 2020
 
