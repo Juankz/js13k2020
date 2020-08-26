@@ -17,8 +17,11 @@ export default AFRAME.registerSystem('device-setup', {
   addHand: function(id) {
     let hand = document.createElement('a-entity');
     hand.setAttribute('laser-controls', `hand: ${id}`);
-    hand.setAttribute('raycaster','objects: .actionable; far: 4');
-    this.el.appendChild(hand)
+    hand.id = id;
+    if(id == 'right') {
+      hand.setAttribute('mixin','movement-control');
+    }
+    document.getElementById('player').appendChild(hand)
   },
 
   isMobile: function() {
@@ -31,6 +34,10 @@ export default AFRAME.registerSystem('device-setup', {
 
   isHeadset: function() {
     return this.device == DEVICES.headset;
+  },
+
+  removeCursor: function() {
+    document.getElementById('cursor').remove();
   },
 
   // The configuration by default suits Desktop and Mobile, if a headset is detected, change the configuration accordingly

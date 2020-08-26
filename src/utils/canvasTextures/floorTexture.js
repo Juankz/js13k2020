@@ -1,5 +1,5 @@
-import './canvasTexture.js';
 import CanvasTexture from './canvasTexture.js';
+
 class FloorTexture extends CanvasTexture {
   constructor() {
     super();

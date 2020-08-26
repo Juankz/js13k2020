@@ -6,15 +6,21 @@
     <script src="./index.js"></script>
   </head>
   <body>
-    <div class="device-selector"></div>
     <a-scene game-manager level-generator>
       <a-assets>
         <a-mixin id="floorMaterial" material="color: cyan"></a-mixin>
+        <a-mixin id="movement-control" raycaster="far: 5; autoRefresh: true; objects: .floor" movement-control></a-mixin>
       </a-assets>
-      <a-plane width="100" height="100" rotation="-90 0 0" texture-material="texture: floor; repeat: 100 100"></a-plane>
-      <a-entity id="rig" position="0 0 0">
+      <a-plane class="floor" width="100" height="100" rotation="-90 0 0" texture-material="texture: floor; repeat: 100 100"></a-plane>
+      <a-entity id="position-marker" position-marker geometry="primitive: circle; radius: 0.5;" rotation="-90 0 0" position="0 0.1 -2" texture-material="texture: position-marker; transparent: true;"></a-entity>
+
+      <a-entity id="player" position="0 0 0">
         <a-entity id="camera" position="0 1.6 0" camera look-controls="pointerLockEnabled:true">
-          <a-cursor id="cursor"></a-cursor>
+          <a-entity id="cursor" cursor="fuse: false;"
+            position="0 0 -1"
+            mixin="movement-control"
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03"
+            material="color: black; shader: flat"></a-entity>
         </a-entity>
       </a-entity>
       <a-sky color="#222"></a-sky>
