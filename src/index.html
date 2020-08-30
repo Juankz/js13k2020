@@ -13,8 +13,8 @@
       <a-entity id="position-marker" position-marker geometry="primitive: circle; radius: 0.5;" rotation="-90 0 0" position="0 0.1 -2" texture-material="texture: position-marker; transparent: true;"></a-entity>
 
       <a-entity id="player" position="0 0 0">
+        <a-entity id="player-head" player-head geometry="primitive: sphere; radius: 0.2" position="0 1.6 -1.5"></a-entity>
         <a-entity id="camera" position="0 1.6 0" camera look-controls="pointerLockEnabled:true" wasd-controls>
-          <a-entity id="player-head" geometry="primitive: sphere; radius: 0.1"></a-entity>
           <a-entity id="cursor" cursor="fuse: false;"
             position="0 0 -1"
             mixin="movement-control"
