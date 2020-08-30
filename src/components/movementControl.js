@@ -39,6 +39,7 @@ export default AFRAME.registerComponent('movement-control', {
     this.positionMarker.object3D.position.set(pos.x, pos.y + 0.1, pos.z)
   },
   movePlayer(pos) {
-    this.player.object3D.position.set(pos.x, pos.y + 0.1, pos.z)
+    let player_pos = this.player.object3D.position;
+    player_pos.set(pos.x, player_pos.y, pos.z)
   }
 });
