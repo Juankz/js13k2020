@@ -3,9 +3,10 @@ class body {
     const lightPos = new THREE.Vector3(0, 2, 1.4);
 
     this.entity = document.createElement('a-entity');
+    this.entity.classList.add('robot');
     this.entity.setAttribute('robot', '');
     this.entity.object3D.position.set(x, 0, z);
-
+    
     const body = document.createElement('a-entity');
     body.setAttribute('geometry', 'primitive: robot');
     body.setAttribute('material', 'color: gray');
@@ -27,7 +28,8 @@ class body {
     lightEmitter.object3D.position.set(0, 0, 0.7);
 
     const light = document.createElement('a-entity');
-    light.setAttribute('light', 'type: spot; angle: 20; color: fff; castShadow: true');
+    light.classList.add('light');
+    light.setAttribute('light', 'type: spot; angle: 40; color: fff; castShadow: true');
     light.setAttribute('rotation', '-30 180 0');
     light.object3D.position.set(lightPos.x, lightPos.y, lightPos.z);
 
@@ -36,7 +38,7 @@ class body {
     raycast.object3D.position.set(lightPos.x, lightPos.y, lightPos.z);
     raycast.setAttribute('raycaster', `far: 15;
      direction: 0, 0, 1;
-     objects: .playerhead, .obstacles;`);
+     objects: #player-head, .obstacles;`);
     
     head.appendChild(lightEmitter);
     this.entity.appendChild(head);
