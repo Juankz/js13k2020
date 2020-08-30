@@ -1,11 +1,20 @@
+/*
+x: column
+o: small obstacle
+d: door
+p: player
+g: goal
+0-9: Robots
+*/
+
 const blueprints = [
 `
-x-------------x
-x--oo--xx--oo-x
-x-------------x
+x----0--------x
 x-------------x
 x-------------x
+xxxoo--xx--ooxx
 x-------------x
+dp-----------gd
 x-------------x
 x-------------x
 x-------------x
@@ -14,12 +23,12 @@ xxxxxxxxxxxxxxx
 `
 xxxxxxxxxxxxxxx
 x-------------x
-x-------------x
-x-----x-x-----x
-x-----x-x-----x
-x-----xxx-----x
-x-------x-----x
-x-------x-----x
+de------------x
+x-----o-o-----x
+x-----o-o--0--x
+x-----o-------x
+x-------o----gd
+x--1----o-----x
 x-------------x
 xxxxxxxxxxxxxxx
 `
