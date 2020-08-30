@@ -5,7 +5,8 @@ canvas.width = 512;
 canvas.height = 512;
     
 const ctx = canvas.getContext('2d');
-drawText(ctx, text)
+drawCircularGradient(ctx)
+// drawText(ctx, text)
 // drawFloor(ctx);
 
 function drawText(ctx, textLines) {
@@ -19,6 +20,28 @@ function drawText(ctx, textLines) {
   //   ctx.fillText(textLines[i], 10, 50*i); 
   // }
 
+}
+
+function drawCircularGradient(ctx) {
+  const fromColor = 'rgba(108, 209, 107, 1)'
+  const toColor = 'rgba(196, 188, 26, 0)'
+  const strokeColor = 'rgba(196, 188, 26, 0.8)'
+
+  const hw = ctx.canvas.width * 0.5;
+  const hh = ctx.canvas.height * 0.5;
+  const gradient = ctx.createRadialGradient(hw, hh, 0, hw, hh, hw);
+  gradient.addColorStop(0, fromColor);
+  gradient.addColorStop(1, toColor);
+  gradient.addColorStop(1, 'transparent');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+
+  ctx.strokeStyle = strokeColor;
+  ctx.lineWidth = 5;
+  ctx.beginPath();
+  ctx.arc(hw, hh, hw - 30, 0, 2 * Math.PI);
+  ctx.stroke(); 
 }
 
 function drawShape(ctx){
