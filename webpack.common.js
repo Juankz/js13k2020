@@ -8,12 +8,14 @@ module.exports = {
     new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
     new HtmlWebpackPlugin({
     template: 'src/index.html',
-    inject: false,
+    inject: 'head',
   })
   ],
-  entry: './src/index.js',
+  entry: {
+    main: './src/index.js',
+  },
   output: {
-    filename: 'index.js',
+    filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
 };
