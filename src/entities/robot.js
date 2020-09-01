@@ -1,11 +1,14 @@
+import {robotBehaviours, BEHAVIOURS} from '../utils/robotBehaviours.js';
+
 class body {
-  constructor(x,z) {
+  constructor(x,z, levelId, robotId) {
     const lightPos = new THREE.Vector3(0, 2, 1.4);
 
     this.entity = document.createElement('a-entity');
     this.entity.classList.add('robot');
-    this.entity.setAttribute('robot', '');
+    this.entity.setAttribute('player-detection','')
     this.entity.object3D.position.set(x, 0, z);
+    this.attachBehaviour(robotBehaviours[levelId][robotId])
     
     const body = document.createElement('a-entity');
     body.setAttribute('geometry', 'primitive: robot');
@@ -29,7 +32,7 @@ class body {
 
     const light = document.createElement('a-entity');
     light.classList.add('light');
-    light.setAttribute('light', 'type: spot; angle: 40; color: fff; castShadow: true');
+    light.setAttribute('light', 'type: spot; angle: 35; color: fff; castShadow: true');
     light.setAttribute('rotation', '-30 180 0');
     light.object3D.position.set(lightPos.x, lightPos.y, lightPos.z);
 
@@ -47,6 +50,12 @@ class body {
     this.entity.appendChild(raycast);
 
     return this.entity;
+  }
+
+  attachBehaviour(behaviourData) {
+    switch(behaviourData.behaviour) {
+      case BEHAVIOURS.TRANSLATION:
+        this.entity.setAttribute('translation-behaviour', behaviourData);    }
   }
   
   getEntity() {

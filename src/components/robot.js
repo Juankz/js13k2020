@@ -3,7 +3,7 @@ const FORWARD = new THREE.Vector3(0, 0, -1);
 
 let print = false
 
-export default AFRAME.registerComponent('robot', {
+export default AFRAME.registerComponent('player-detection', {
   dependencies: ['raycaster'],
   init: function() {
     this.instersectionHead = this.instersectionLevel = 0;
