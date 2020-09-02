@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <script src="https://aframe.io/releases/1.0.0/aframe.min.js"></script>
+    <script src="./index.js"></script>
+    <style>
+      .debug {
+        position: absolute;
+        background-color: white;
+        color: black;
+        z-index: 10;
+        width: 300px;
+        height: 100px;
+        top: 0;
+        left: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="debug">
+      <p id="playerpos"></p>
+    </div>
+    <a-scene>
+      <a-box collision position="-3 0.5 -5" color="blue"></a-box>
+      <a-box collision width="0.9" height="0.1" depth="0.9" position="0 0 -4" color="blue"></a-box>
+      <a-box collision position="3 0.5 -6" color="blue"></a-box>
+      <a-plane width="20" height="20" color="gray" rotation="-90 0 0"></a-plane>
+      <a-camera id="player" look-controls wasd-controls>
+        <a-cursor></a-cursor>
+      </a-camera>
+      <a-sky id="bg" color="#ECECEC"></a-sky>
+    </a-scene>
+  </body>
+</html>
