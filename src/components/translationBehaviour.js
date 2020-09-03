@@ -19,9 +19,9 @@ export default AFRAME.registerComponent('translation-behaviour', {
     this.previousState = STATES.INSPECTING;
     this.speed = 3;
     this.initialPosition = this.el.object3D.position.clone();
+    this.finalPosition = this.el.object3D.position.clone().add(this.data.target);
     this.temp = new THREE.Vector3();
     this.elapsedTime = this.data.await - this.data.delay;
-    this.targetPos = new THREE.Vector3();
   },
   tick: function(time, delta) {
     switch(this.state){
@@ -37,23 +37,19 @@ export default AFRAME.registerComponent('translation-behaviour', {
         }
         break;
       case STATES.MOVING:
-        this.temp.copy(this.data.target).normalize();
-        this.el.object3D.position.add(this.temp.multiplyScalar(this.speed*delta*0.001))
-        this.temp.copy(this.initialPosition).add(this.data.target);
-        this.targetPos.copy(this.temp);
-        if(this.el.object3D.position.distanceToSquared (this.temp) < 0.1){
-          this.state = STATES.INSPECTING;
-          this.previousState = STATES.MOVING
-        }
+        this.move(this.finalPosition, delta);
         break;
       case STATES.MOVING_BACK:
-        this.temp.copy(this.data.target).normalize().multiplyScalar(-1);
-          this.el.object3D.position.add(this.temp.multiplyScalar(this.speed*delta*0.001))
-          if(this.el.object3D.position.distanceToSquared (this.initialPosition) < 0.1){
-            this.state = STATES.INSPECTING;
-            this.previousState = STATES.MOVING_BACK;
-          }
-          break;
+        this.move(this.initialPosition, delta);
+        break;
+    }
+  },
+  move: function(target, delta) {
+    this.temp.copy(target).sub(this.el.object3D.position).normalize();
+    this.el.object3D.position.add(this.temp.multiplyScalar(this.speed*delta*0.001))
+    if(this.el.object3D.position.distanceToSquared (target) < 1){
+      this.previousState = this.state;
+      this.state = STATES.INSPECTING;
     }
   }
 })
