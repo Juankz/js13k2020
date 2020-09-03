@@ -4,5 +4,10 @@ export default AFRAME.registerSystem('game-manager', {
       this.level = 0;
       this.el.systems['level-generator'].generate(this.level)
     }.bind(this);
+  },
+  onGoalReached: function() {
+    this.level++;
+    this.el.systems['level-generator'].clearCurrentLevel();
+    this.el.systems['level-generator'].generate(this.level);
   }
 })
