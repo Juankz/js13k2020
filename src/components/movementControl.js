@@ -15,7 +15,7 @@ export default AFRAME.registerComponent('movement-control', {
       this.target = null;
       this.positionMarker.components['position-marker'].hide()
     });
-    this.el.addEventListener('click', (event)=>{
+    this.el.addEventListener('mousedown', (event)=>{
       if (event.detail.intersectedEl.classList.contains('floor')){
         this.movePlayer(event.detail.intersection.point)
       }
