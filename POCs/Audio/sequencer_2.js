@@ -36,7 +36,7 @@
 		var g = context.createGain();
 		var o = context.createOscillator();
 		o.connect(g);
-		o.type="sawtooth";
+		o.type="sine";
 		g.connect(context.destination);
 		o.start(context.currentTime);
 		var timeNote = context.currentTime;
@@ -47,13 +47,13 @@
 		o.stop(timeNote);
 	}
 
-	function playNote(figure, note, gain, osl, timeNote, audioCtx){
+	function playNote(figure, note, gain, osl, timeNote){
 		var tempo = 120
 		const secondsPerBeat = 60.0 / tempo * figure;
 		
 		// Advance the beat number, wrap to zero
-		gain.gain.value = 0.2;
-		gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2)
+		gain.gain.setValueAtTime(0.2, timeNote);
+		gain.gain.exponentialRampToValueAtTime(0.01, timeNote + 0.2)
 		osl.frequency.setValueAtTime(note, timeNote);
 		return secondsPerBeat; // Add beat length to last beat time
 	};
