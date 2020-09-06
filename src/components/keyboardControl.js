@@ -9,13 +9,14 @@ export default AFRAME.registerComponent('keyboard-controls', {
     this._z = new THREE.Vector3();
     this.euler = new THREE.Euler( 0, Math.PI/2, 0, 'XYZ' );
     this.camera = document.getElementById('camera');
-    this.speed = 2.5;
+    this.speed = 1.5;
     this.crouchedDown = false;
     this.keys = [];
     this.keyDownHandler = this.onKeyDown.bind(this);
     this.keyUpHandler = this.onKeyUp.bind(this);
     this.collisionBox = this.el.components['collision-box'];
     this.collisionBoxPos = new THREE.Vector3(this.el.object3D.position.x, 0, this.el.object3D.position.z);
+    this.v = new THREE.Vector3();
     this.createEvents();
   },
 
@@ -99,13 +100,16 @@ export default AFRAME.registerComponent('keyboard-controls', {
     this.collisionBoxPos.add(this._x.multiplyScalar(this.speed*delta*0.001))
     this.collisionBox.x = this.collisionBoxPos.x;
     this.collisionBox.y = this.collisionBoxPos.z;
-    let diff = this.el.object3D.position.distanceToSquared(this.collisionBoxPos);
+
+    this.v.set(this.collisionBox.x + this.collisionBox.w/2, this.collisionBoxPos.y, this.collisionBox.y + this.collisionBox.h/2);
+
+    let diff = this.el.object3D.position.distanceToSquared(this.v);
     if(diff<0.05){
-      this.el.object3D.position.lerp(this.collisionBoxPos, 0.1);
+      this.el.object3D.position.lerp(this.v, 0.1);
     }else if(diff<0.1){
-      this.el.object3D.position.lerp(this.collisionBoxPos, 0.2);
+      this.el.object3D.position.lerp(this.v, 0.2);
     }else{
-      this.el.object3D.position.lerp(this.collisionBoxPos, 0.4);
+      this.el.object3D.position.lerp(this.v, 0.4);
     }
   },
 

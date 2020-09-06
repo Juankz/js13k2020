@@ -55,8 +55,8 @@ export default AFRAME.registerSystem('collision-box', {
       this.v1.x += this.playerBox.c.x - box.c.x;
       this.v1.y += this.playerBox.c.y - box.c.y;
       this.v1.normalize();
-      this.playerBox.x += this.v1.x * 2.5 * delta*0.001;
-      this.playerBox.y += this.v1.y * 2.5 * delta*0.001;
+      this.playerBox.x += this.v1.x * 1.5 * delta*0.001;
+      this.playerBox.y += this.v1.y * 1.5 * delta*0.001;
     })
   },
 
