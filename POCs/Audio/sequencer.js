@@ -57,5 +57,5 @@ class Sequencer{
   }
 }
 
-let seq = new Sequencer;
-createButton('Play sequence', seq.play.bind(seq));
+// let seq = new Sequencer;
+// createButton('Play sequence', seq.play.bind(seq));

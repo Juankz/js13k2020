@@ -27,8 +27,8 @@
 		var context = new AudioContext();
 		for (var i = 0; i < secuence.length; i++){
 			let params = secuence[i].split(' ');
-			figure.push(params[0]);
-			notes.push(params[1]);
+			notes.push(params[0]);
+			figure.push(params[1]);
 		};
 
 		var new_figure = figure.map(n => figures[n]);
@@ -42,19 +42,23 @@
 		var timeNote = context.currentTime;
 		for (var cnt = 0; cnt < new_figure.length; cnt += 1)
 		{
-			timeNote += playNote(new_figure[cnt], new_note[cnt], o, timeNote);
+			timeNote += playNote(new_figure[cnt], new_note[cnt],g, o, timeNote, context);
 		}
 		o.stop(timeNote);
 	}
 
-	function playNote(figure, note, osl, timeNote){
+	function playNote(figure, note, gain, osl, timeNote, audioCtx){
 		var tempo = 120
 		const secondsPerBeat = 60.0 / tempo * figure;
 		
 		// Advance the beat number, wrap to zero
+		gain.gain.value = 0.2;
+		gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 2)
 		osl.frequency.setValueAtTime(note, timeNote);
 		return secondsPerBeat; // Add beat length to last beat time
 	};
 
 let sec = ['C2 q', 'A#2 es', 'F2 h', 'G2 h', 'C2 q'];
-createButton('interpreterSecuence', interpreterSecuence(sec));
+createButton('interpreterSecuence', ()=>{
+	interpreterSecuence(sec);
+});
