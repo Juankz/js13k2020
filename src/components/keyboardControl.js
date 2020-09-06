@@ -1,7 +1,8 @@
 const STAND_HEIGHT = 0.8;
 const CROUCH_HEIGHT = 1.6;
 
-export default AFRAME.registerComponent('player', {
+export default AFRAME.registerComponent('keyboard-controls', {
+  dependencies: ['collision-box'],
   init: function() {
     this.dirVector = new THREE.Vector3();
     this._x = new THREE.Vector3();
@@ -13,6 +14,8 @@ export default AFRAME.registerComponent('player', {
     this.keys = [];
     this.keyDownHandler = this.onKeyDown.bind(this);
     this.keyUpHandler = this.onKeyUp.bind(this);
+    this.collisionBox = this.el.components['collision-box'];
+    this.collisionBoxPos = new THREE.Vector3(this.el.object3D.position.x, 0, this.el.object3D.position.z);
     this.createEvents();
   },
 
@@ -91,8 +94,19 @@ export default AFRAME.registerComponent('player', {
     this._z.normalize();
     this._x.normalize();
 
-    this.el.object3D.position.add(this._z.multiplyScalar(this.speed*delta*0.001)) 
-    this.el.object3D.position.add(this._x.multiplyScalar(this.speed*delta*0.001))
+    this.collisionBoxPos.set(this.collisionBox.x, 0, this.collisionBox.y);
+    this.collisionBoxPos.add(this._z.multiplyScalar(this.speed*delta*0.001))
+    this.collisionBoxPos.add(this._x.multiplyScalar(this.speed*delta*0.001))
+    this.collisionBox.x = this.collisionBoxPos.x;
+    this.collisionBox.y = this.collisionBoxPos.z;
+    let diff = this.el.object3D.position.distanceToSquared(this.collisionBoxPos);
+    if(diff<0.05){
+      this.el.object3D.position.lerp(this.collisionBoxPos, 0.1);
+    }else if(diff<0.1){
+      this.el.object3D.position.lerp(this.collisionBoxPos, 0.2);
+    }else{
+      this.el.object3D.position.lerp(this.collisionBoxPos, 0.4);
+    }
   },
 
   tick: function(time, delta){

@@ -53,7 +53,7 @@ export default AFRAME.registerSystem('device-setup', {
   },
 
   addKeyboardControl: function() {
-    this.player.setAttribute('keyboard-control','');
+    this.player.setAttribute('keyboard-controls','');
   },
 
   removeCursor: function() {
@@ -65,7 +65,7 @@ export default AFRAME.registerSystem('device-setup', {
   },
 
   removeKeyboardControl: function() {
-    this.player.removeAttribute('keyboard-control');
+    this.player.removeAttribute('keyboard-controls');
   },
 
   clearPreviousConfiguration: function() {
