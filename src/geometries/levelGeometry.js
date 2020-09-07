@@ -8,7 +8,7 @@ AFRAME.registerGeometry('level', {
   },
 
   init: function(data) {
-    let geometries = this.generateLevel(blueprints[data.blueprintId]);
+    let geometries = this.generateLevel(blueprints[data.blueprintId].level);
     this.geometry = this.mergeGeometry(geometries);
   },
 
@@ -31,7 +31,7 @@ AFRAME.registerGeometry('level', {
           geometries.push(this.newColumn(x, z, 3));
           break;
         case 'o':
-          geometries.push(this.newColumn(x, z, 1));
+          geometries.push(this.newColumn(x, z, 1.3));
           break;
         case '\n':
           z++;
