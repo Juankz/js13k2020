@@ -15,13 +15,6 @@ class Sound {
   }
 }
 
-class Piano extends Sound {
-  constructor() {
-    this.createOscillator(4);
-  }
-}
-
-
 function playSound(){
   let context = getAudioContext();  
   // creates oscillator to create the actual sound with the choosen note frequency
