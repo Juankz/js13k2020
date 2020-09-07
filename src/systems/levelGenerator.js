@@ -1,6 +1,7 @@
 import blueprints from '../utils/blueprints.js';
 import DoorsPool from '../entities/doorsPool.js';
 import RobotsPool from '../entities/robotsPool.js';
+import TerminalsPool from '../entities/terminalsPool.js';
 import {robotBehaviours} from '../utils/robotBehaviours.js';
 
 
@@ -9,12 +10,16 @@ export default AFRAME.registerSystem('level-generator', {
     this.levelEntities = []
     this.doorsPool = new DoorsPool();
     this.robotsPool = new RobotsPool();
+    this.terminalsPool = new TerminalsPool();
     this.generateLevel(blueprintId);
-    this.placeElements(blueprints[blueprintId], blueprintId);
+    this.placeElements(blueprints[blueprintId]);
+    this.el.emit('level-updated', blueprintId);
   },
   clearCurrentLevel: function() {
     this.doorsPool.retrieveAllEntities();
     this.robotsPool.retrieveAllEntities();
+    this.terminalsPool.retrieveAllEntities();
+    if(this.level) {level.components['collision-box'].boxes = []}
   },
   generateLevel: function(blueprintId) {
     let level = document.getElementById('level');
@@ -26,19 +31,31 @@ export default AFRAME.registerSystem('level-generator', {
       level.setAttribute('shadow','cast: true; receive: true;');
       this.el.appendChild(level);
     }
+    level.setAttribute('collision-box', `multipleBoxes: true, blueprintId: ${blueprintId}`);
     level.setAttribute('geometry', `primitive: level; blueprintId: ${blueprintId}`)
+    this.level = level;
   },
-  placeElements: function(blueprint, blueprintId) {
+  placeElements: function(blueprint) {
     let x = 0, z = 0;
-    for (let i = 0; i < blueprint.length - 1; i++){
-      switch(blueprint[i]){
+    for (let i = 0; i < blueprint.level.length - 1; i++){
+      switch(blueprint.level[i]){
         case 'd': //doors
           const door = this.doorsPool.requestEntity();
           door.object3D.position.set(x, 1.5, z);
           break;
         case 'p': //player
-          const  player_pos = document.getElementById('player').object3D.position;
-          player_pos.set(x, player_pos.y, z);
+          const  player = document.getElementById('player');
+          player.object3D.position.set(x, player.object3D.position.y, z);
+          player.setAttribute('collision-box', `x: ${x}; y: ${z}`);
+          break;
+        case 'T': // Terminal
+          const terminal = this.terminalsPool.requestEntity();
+          terminal.setAttribute('terminal', `text: ${blueprint.terminal}`);
+          terminal.object3D.position.set(x, 1.6, z);
+          if (blueprint.terminal == 'tutorial'){
+            terminal.setAttribute('terminal', 'tutorial: true');
+          }
+          terminal.play();
           break;
         case 'g': //Goal
           let goal = document.getElementById('goal');
@@ -57,9 +74,9 @@ export default AFRAME.registerSystem('level-generator', {
         case '0':
         case '1':
         case '2':
-          let robotId = parseInt(blueprint[i]);
+          let robotId = parseInt(blueprint.level[i]);
           const robot = this.robotsPool.requestEntity();
-          const robotData = robotBehaviours[blueprintId][robotId]
+          const robotData = blueprint.robots[robotId]
           robot.object3D.position.set(x, 0, z);
           if(robotData.rotationY){
             robot.object3D.rotation.y = robotData.rotationY;

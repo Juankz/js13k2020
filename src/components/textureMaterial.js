@@ -1,5 +1,6 @@
 import FloorTexture from '../utils/canvasTextures/floorTexture.js';
 import PositionMarkerTexture from '../utils/canvasTextures/positionMarkerTexture.js';
+import TerminalTexture from '../utils/canvasTextures/terminalTexture.js';
 
 AFRAME.registerComponent('texture-material', {
   dependencies: ['geometry'],
@@ -12,6 +13,7 @@ AFRAME.registerComponent('texture-material', {
 
   },
   init: function() {
+    this.canvasEl = null;
     let data = this.data;
     let texture_name = data.texture.toLowerCase();
     let params = {
@@ -28,8 +30,14 @@ AFRAME.registerComponent('texture-material', {
         params.map = new PositionMarkerTexture().getTexture();
         this.material = this.el.getOrCreateObject3D('mesh').material = new THREE.MeshBasicMaterial(params);
         break;
+      case "terminal":
+          this.canvasEl = new TerminalTexture();
+          params.map = this.canvasEl.getTexture();
+          params.map.needsUpdate = true;
+          this.material = this.el.getOrCreateObject3D('mesh').material = new THREE.MeshBasicMaterial(params);
+          this.material.needsUpdate = true;
+          break;
     }
     params.map.repeat.set(data.repeat.x, data.repeat.y);
-
   }
 });

@@ -14,6 +14,7 @@ class CanvasTexture {
       texture = new THREE.CanvasTexture(this.ctx.canvas);
       texture.wrapS = THREE.RepeatWrapping;
       texture.wrapT = THREE.RepeatWrapping;
+      this.texture = texture;
     }
     return texture;
   }
