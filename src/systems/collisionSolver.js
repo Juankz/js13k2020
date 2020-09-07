@@ -7,11 +7,6 @@ export default AFRAME.registerSystem('collision-box', {
     this.v2 = new THREE.Vector2();
     this.v3 = new THREE.Vector2();
     this.v4 = new THREE.Vector2();
-
-    setTimeout(()=>{
-      console.log('sys')
-      console.log(this)
-    },2000)
   },
 
   detectCollision(){
@@ -23,13 +18,11 @@ export default AFRAME.registerSystem('collision-box', {
         boxComponent.boxes.forEach(box => {
           if(this.boxesCollide(box,this.playerBox)){
             this.boxesThatCollidedWithPlayer.push(box);
-            console.log(`collided (${box.x}, ${box.y})`);
           }
         });
       }else{
         if(this.boxesCollide(boxComponent,this.playerBox)){
           this.boxesThatCollidedWithPlayer.push(boxComponent);
-          console.log(`collided (${box.x}, ${box.y})`);
         }
       }
     });

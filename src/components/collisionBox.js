@@ -1,13 +1,13 @@
-import blueprints from '../utils/blueprints.js';
+import {blueprints} from '../utils/blueprints.js';
 
 export default AFRAME.registerComponent('collision-box', {
   schema: {
     multipleBoxes: {type: 'boolean', default: false},
-    blueprintId: {type: 'number', default: 1},
-    x: {type: 'number', default: 1},
-    y: {type: 'number', default: 1},
-    w: {type: 'number', default: 1},
-    h: {type: 'number', default: 1},
+    blueprintId: {default: 0},
+    x: {default: 1},
+    y: {default: 1},
+    w: {default: 1},
+    h: {default: 1},
   },
 
   init: function() {
@@ -22,6 +22,7 @@ export default AFRAME.registerComponent('collision-box', {
       }else{
         this.system.registerEntity(this.el);
       }
+     // Force update when a new level is created
       document.querySelector('a-scene').addEventListener('level-updated', this.update.bind(this));
     }else{
       /*
@@ -30,6 +31,7 @@ export default AFRAME.registerComponent('collision-box', {
      this.boxes = [];
      this.createBoxes(blueprints[this.data.blueprintId].level)
      this.system.registerEntity(this.el);
+     // Force update when a new level is created
      document.querySelector('a-scene').addEventListener('level-updated', this.updateLevel.bind(this));
     }
   },
@@ -43,14 +45,12 @@ export default AFRAME.registerComponent('collision-box', {
       this.c = new THREE.Vector2(this.x + this.w*0.5, this.y + this.h*0.5);
     }else{
      this.boxes = [];
-     console.log('blueprint id ', this.data.blueprintId)
      this.createBoxes(blueprints[this.data.blueprintId].level)
     }
   },
 
   updateLevel(blueprintId){
     this.boxes = [];
-    console.log('blueprint id ', blueprintId.detail)
     this.createBoxes(blueprints[blueprintId.detail].level)
   },
 
@@ -60,7 +60,7 @@ export default AFRAME.registerComponent('collision-box', {
       switch(blueprint[i]){
         case 'x':
           case 'o':
-          this.boxes.push({x: x, y:z, w: 1, h:1, c: new THREE.Vector2(x+0.5, z+0.5)})
+          this.boxes.push({x: x-0.5, y:z-0.5, w: 1, h:1, c: new THREE.Vector2(x+0.5, z+0.5)})
           break;
         case '\n':
           z++;
