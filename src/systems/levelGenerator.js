@@ -1,8 +1,7 @@
-import blueprints from '../utils/blueprints.js';
+import {blueprints} from '../utils/blueprints.js';
 import DoorsPool from '../entities/doorsPool.js';
 import RobotsPool from '../entities/robotsPool.js';
 import TerminalsPool from '../entities/terminalsPool.js';
-import {robotBehaviours} from '../utils/robotBehaviours.js';
 
 
 export default AFRAME.registerSystem('level-generator', {
@@ -27,7 +26,7 @@ export default AFRAME.registerSystem('level-generator', {
       level = document.createElement('a-entity');
       level.id = "level";
       level.classList.add('obstacles');
-      level.setAttribute('material','color: gray');
+      level.setAttribute('texture-material','texture: wall');
       level.setAttribute('shadow','cast: true; receive: true;');
       this.el.appendChild(level);
     }
@@ -46,7 +45,7 @@ export default AFRAME.registerSystem('level-generator', {
         case 'p': //player
           const  player = document.getElementById('player');
           player.object3D.position.set(x, player.object3D.position.y, z);
-          player.setAttribute('collision-box', `x: ${x}; y: ${z}`);
+          player.setAttribute('collision-box', `x: ${x}; y: ${z}; w: 0.95; h:0.95`);
           break;
         case 'T': // Terminal
           const terminal = this.terminalsPool.requestEntity();
@@ -63,7 +62,7 @@ export default AFRAME.registerSystem('level-generator', {
             goal = document.createElement('a-entity');
             goal.id = 'goal'
             goal.setAttribute('geometry', 'width: 0.9; height: 0.1; depth: 0.9');
-            goal.setAttribute('material', 'color: blue');
+            goal.setAttribute('material', 'color: orange');
             goal.setAttribute('trigger', '');
             goal.setAttribute('goal', '');
             goal.setAttribute('shadow', 'receive: true; cast: false;');
@@ -76,7 +75,8 @@ export default AFRAME.registerSystem('level-generator', {
         case '2':
           let robotId = parseInt(blueprint.level[i]);
           const robot = this.robotsPool.requestEntity();
-          const robotData = blueprint.robots[robotId]
+          const robotData = blueprint.robots[robotId];
+          robot.id = 'robot'+robotId;
           robot.object3D.position.set(x, 0, z);
           if(robotData.rotationY){
             robot.object3D.rotation.y = robotData.rotationY;

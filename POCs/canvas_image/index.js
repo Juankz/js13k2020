@@ -5,9 +5,32 @@ canvas.width = 512;
 canvas.height = 512;
     
 const ctx = canvas.getContext('2d');
-drawCircularGradient(ctx)
+drawWall(ctx);
+// drawCircularGradient(ctx)
 // drawText(ctx, text)
 // drawFloor(ctx);
+
+function drawWall(ctx){
+  let w = ctx.canvas.width;
+  let h = ctx.canvas.height
+  const lightGray = "#aaaaaa";
+  const darkGray = "#444444";
+
+  var grd = ctx.createLinearGradient(0, 0, w, 0);
+  grd.addColorStop(0, '#555');
+  grd.addColorStop(.1, '#eee');
+  grd.addColorStop(.9, '#eee');
+  grd.addColorStop(1, '#555');
+  
+
+  // var grd = ctx.createRadialGradient(w/2, h/2, 1, w/2, h/2, w/1.5);
+  // grd.addColorStop(0, "white");
+  // grd.addColorStop(1, "black");
+
+  // Fill with gradient
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, w, h);
+}
 
 function drawText(ctx, textLines) {
   ctx.fillStyle="black";

@@ -1,6 +1,8 @@
 import FloorTexture from '../utils/canvasTextures/floorTexture.js';
 import PositionMarkerTexture from '../utils/canvasTextures/positionMarkerTexture.js';
 import TerminalTexture from '../utils/canvasTextures/terminalTexture.js';
+import WallTexture from '../utils/canvasTextures/wallTexture.js';
+import DoorTexture from '../utils/canvasTextures/doorTexture.js';
 
 AFRAME.registerComponent('texture-material', {
   dependencies: ['geometry'],
@@ -24,6 +26,14 @@ AFRAME.registerComponent('texture-material', {
     switch(texture_name) {
       case "floor":
         params.map = new FloorTexture().getTexture();
+        this.material = this.el.getOrCreateObject3D('mesh').material = new THREE.MeshStandardMaterial(params);
+        break;
+      case "wall":
+        params.map = new WallTexture().getTexture();
+        this.material = this.el.getOrCreateObject3D('mesh').material = new THREE.MeshStandardMaterial(params);
+        break;
+      case "door":
+        params.map = new DoorTexture().getTexture();
         this.material = this.el.getOrCreateObject3D('mesh').material = new THREE.MeshStandardMaterial(params);
         break;
       case "position-marker":
