@@ -14,7 +14,15 @@ let s2 = [
   'C2 q'
 ]
 
-let s3 = ['D#3 q']
+let s3 = [
+  'B3 e', 'F3 e', 'A#3 e', 'F#3 e', 
+  'B3 e', 'F3 e', 'A#3 e', 'F#3 e',
+  'D3 q', 'D#3 es', 'A#2 es',
+  'B3 e', 'F3 e', 'A#3 e', 'F#3 e', 
+  'B3 e', 'F3 e', 'A#3 e', 'F#3 e',
+  'D3 q', 'D#3 es', 'A#2 es', 'F#2 q',
+  'F2 q', 'D2 e', 'D#2 e'
+]
 
 createButton('Play Sequence', ()=>{
   let context = new AudioContext();  
@@ -44,7 +52,7 @@ createButton('Play Piano', ()=>{
   
   let sequence1 = new Sequencer({
     sequence: s3,
-    tempo: 60,
+    tempo: 25,
     instrument: new Piano(context)
   });
 
