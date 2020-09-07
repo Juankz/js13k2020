@@ -24,6 +24,15 @@ let s3 = [
   'F2 q', 'D2 e', 'D#2 e'
 ]
 
+let s4 = [
+  'C1 w', 'C1 w',
+  'C1 w', 'C1 w',
+  'D1 w', 'D1 w',
+  'C1 w', 'C1 w',
+  'D1 w', 'D1 w',
+  'C1 w', 'C1 w',
+]
+
 createButton('Play Sequence', ()=>{
   let context = new AudioContext();  
   
@@ -51,14 +60,14 @@ createButton('Play Piano', ()=>{
   let context = new AudioContext();  
   
   let sequence1 = new Sequencer({
-    sequence: s3,
-    tempo: 25,
+    sequence: s4,
+    tempo: 40,
     instrument: new Piano(context)
   });
 
   let play = () => {
     sequence1.play()
-    // setTimeout(play, 2100);
+    setTimeout(play, 10000);
   }
   play();
 });

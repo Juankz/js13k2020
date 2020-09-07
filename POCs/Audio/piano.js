@@ -46,16 +46,16 @@ class Piano extends Instrument {
     // Reduces exponentially the sound, this gives a reallystic feeling
     // as the produced sound decreases the same way the sound of a pulled
     // guitar string would decrease.
-    g.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 0.25)
-    g2.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 0.25)
-    g3.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 0.25)
-    g4.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 0.25)
-    g5.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 0.25)
+    g.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 1.25)
+    g2.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 1.25)
+    g3.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 1.25)
+    g4.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 1.25)
+    g5.gain.exponentialRampToValueAtTime(0.1, this.context.currentTime + time + 1.25)
 
-    o.stop(this.context.currentTime + time + 0.5)
-    o2.stop(this.context.currentTime + time + 0.5)
-    o3.stop(this.context.currentTime + time + 0.5)
-    o4.stop(this.context.currentTime + time + 0.5)
-    o5.stop(this.context.currentTime + time + 0.5)
+    o.stop(this.context.currentTime + time + 1.5)
+    o2.stop(this.context.currentTime + time + 1.5)
+    o3.stop(this.context.currentTime + time + 1.5)
+    o4.stop(this.context.currentTime + time + 1.5)
+    o5.stop(this.context.currentTime + time + 1.5)
   }
 }
