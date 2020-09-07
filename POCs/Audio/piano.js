@@ -18,9 +18,10 @@ class Piano extends Instrument {
       0.1,
       0.05
     ]);
-    this.start(oscillators, noteTime)
-    this.setExponentialRampToValueAtTime(gains, this.context.currentTime + noteTime + decTime)
-    let stopDelay = decTime + 0.5;
+    this.start(oscillators, this.context.currentTime + noteTime);
+    let atenuation = decTime * 1.0;
+    this.setExponentialRampToValueAtTime(gains, this.context.currentTime + noteTime + atenuation)
+    let stopDelay = decTime * 1.5;
     this.stop(oscillators, this.context.currentTime + noteTime + stopDelay);
   }
 }

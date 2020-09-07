@@ -1,4 +1,9 @@
 
+const NOTE_TYPE = {
+  'h': 0.2, //hammered
+  's': 0.8, //sustained
+};
+
 const FIGURES = {
   'w' : 1, 'h' : 0.5, 'q' : 0.25 , 
   'e': 0.125, 's' : 0.0625, 'es' : 0.03125,
@@ -37,10 +42,11 @@ class Sequencer {
   play(){
     let time = 0;
     this.sequence.forEach(element => {
-      let [note, figure] = element.split(' ');
+      let [note, figure, decTime = 's']  = element.split(' '); 
 
+      let dec = NOTE_TYPE[decTime] * 120 / this.tempo;
   		const beatsPerSecond = 60.0 / this.tempo * FIGURES[figure];
-      this.instrument.playNote(FREQUENCIES[note], time);
+      this.instrument.playNote(FREQUENCIES[note], time, dec);
       time += beatsPerSecond;
     });
   }
