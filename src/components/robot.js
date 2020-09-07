@@ -12,6 +12,7 @@ export default AFRAME.registerComponent('player-detection', {
     this.level = document.getElementById('level');
     this.player = document.getElementById('player').object3D;
     this.lightSource = this.el.querySelector('.light').object3D;
+    this.robotEye = this.el.querySelector('.eye');
     this.lightSourceParams = this.el.querySelector('.light').object3DMap.light;
     this.raycastWrapper = this.el.querySelector('.raycast').object3D;
     this.raycaster = this.el.querySelector('.raycast').components.raycaster;
@@ -57,15 +58,19 @@ export default AFRAME.registerComponent('player-detection', {
     intruderInRange |= this.detectIfIntruderInRange(this.playerHead.object3D);
     this.intruderInRange = intruderInRange
     if(intruderInRange) {
-      if (!this.playerDetected) {
-        this.lightSourceParams.color = {r: 0, g: 0.3, b: 0.3};
-      }else{
+      if (this.playerDetected) {
         this.lightSourceParams.color = {r: 1, g: 0.0, b: 0.0};
+        this.robotEye.setAttribute('material', 'emissive: red');
+      }else{
+        // TODO: Just for testing. Remove later
+        this.robotEye.setAttribute('material', 'emissive: white');
+        this.lightSourceParams.color = {r: 1, g: 1, b: 1};
       }
       this.raycastWrapper.lookAt(this.playerHead.object3D.getWorldPosition(ORIGIN));
       this.detectIfIntruderVisible()
     }else{
       print = false;
+      this.robotEye.setAttribute('material', 'emissive: white');
       this.lightSourceParams.color = {r: 1, g: 1, b: 1};
     }
 

@@ -32,7 +32,7 @@ class RobotsPool extends Pool {
 
     const light = document.createElement('a-entity');
     light.classList.add('light');
-    light.setAttribute('light', 'type: spot; angle: 35; color: fff; castShadow: true');
+    light.setAttribute('light', 'type: spot; angle: 35; color: fff; castShadow: true; distance: 15');
     light.setAttribute('rotation', '-30 180 0');
     light.object3D.position.set(lightPos.x, lightPos.y, lightPos.z);
 
@@ -58,7 +58,12 @@ class RobotsPool extends Pool {
   attachBehaviour(behaviourData) {
     switch(behaviourData.behaviour) {
       case BEHAVIOURS.TRANSLATION:
-        this.setAttribute('translation-behaviour', behaviourData);    }
+        this.setAttribute('translation-behaviour', behaviourData);
+        break;
+      case BEHAVIOURS.ROTATION:
+        this.setAttribute('rotation-behaviour', behaviourData);
+        break;
+    }
   }
 }
 

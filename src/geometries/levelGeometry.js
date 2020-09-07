@@ -1,6 +1,6 @@
 /* Defines a geometry with walls and static obstacles */
 
-import blueprints from '../utils/blueprints.js';
+import {blueprints} from '../utils/blueprints.js';
 
 AFRAME.registerGeometry('level', {
   schema: {

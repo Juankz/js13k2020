@@ -1,5 +1,6 @@
 const BEHAVIOURS = {
-  TRANSLATION: 0
+  TRANSLATION: 0,
+  ROTATION: 1,
 }
 
 /*
@@ -32,15 +33,15 @@ const blueprints = [
     `
     xxxxxxxxxxxxxxxxx
     x----x----------x
-    dp--Tx--xx------x
-    x----x-------xxxx
+    dp--Tx----------x
+    x----x--xx--xx--x
     x---------------x
     x--------------gd
     xxxxx---xxx-----x
-    x-------------xxx
-    x---------------x
-    x----0----------x
-    xxxxxxxxxxxxxxxxx
+    ---x----------xxx
+    ---x----------x
+    ---x-0--------x
+    ---xxxxxxxxxxxx
     `,
     terminal: `Don't let them see you!`,
     robots: [
@@ -56,16 +57,16 @@ const blueprints = [
   {
     level:
     `
-    xxxxxxxxxxxxxxxxx
-    x---------------x
-    dp--------------x
-    x---------------x
-    x--------------gd
-    x--xoooooooooxxxx
-    x--x------------x
-    x--x------------x
-    x--x---0--------x
-    xxxxxxxxxxxxxxxxx
+    xxxxxxxxxxxxxxx
+    x-------------x
+    dp------------x
+    x-------------x
+    x------------gd
+    x--xoooooooxxxx
+    x--x----------x
+    x--x----------x
+    x--x---0------x
+    xxxxxxxxxxxxxxx
     `,
     robots: [
       {
@@ -74,6 +75,38 @@ const blueprints = [
         rotationY: Math.PI
       }
     ]
+  },
+  {
+    level:
+     `
+     xxxxxxxxxxxxxxxxxxx
+     dp--x-------------x
+     x---x-------------x
+     x---xxxx----------x
+     x-----------------x
+     x--------x--x-----x
+     x------o------x---x
+     x------o---x------x
+     x-----------------x
+     x-----o---0--x---gd
+     x-----o------x----x
+     x-----------------x
+     x--------ooo------x
+     x-----------------x
+     x-----------------x
+     x-----------------x
+     xxxxxxxxxxxxxxxxxxx
+
+     `,
+     robots: [
+       {
+         behaviour: BEHAVIOURS.ROTATION,
+         targets: [Math.PI],
+         await: 2000,
+         delay: 2000,
+         rotationY: -Math.PI/2
+       }
+     ]
   },
   {
     level:
@@ -92,4 +125,4 @@ const blueprints = [
   },
 ];
 
-export default blueprints;
+export {BEHAVIOURS, blueprints};
