@@ -1,5 +1,5 @@
-const STAND_HEIGHT = 0.8;
-const CROUCH_HEIGHT = 1.6;
+const STAND_HEIGHT = 1.6;
+const CROUCH_HEIGHT = 0.8;
 
 export default AFRAME.registerComponent('keyboard-controls', {
   dependencies: ['collision-box'],
@@ -104,13 +104,13 @@ export default AFRAME.registerComponent('keyboard-controls', {
     this.v.set(this.collisionBox.x + this.collisionBox.w/2, this.collisionBoxPos.y, this.collisionBox.y + this.collisionBox.h/2);
 
     let diff = this.el.object3D.position.distanceToSquared(this.v);
-    if(diff<0.05){
-      this.el.object3D.position.lerp(this.v, 0.1);
-    }else if(diff<0.1){
-      this.el.object3D.position.lerp(this.v, 0.2);
-    }else{
-      this.el.object3D.position.lerp(this.v, 0.4);
-    }
+    // if(diff<0.05){
+    //   this.el.object3D.position.lerp(this.v, 0.1);
+    // }else if(diff<0.1){
+    //   this.el.object3D.position.lerp(this.v, 0.2);
+    // }else{
+    // }
+    this.el.object3D.position.lerp(this.v, 0.4);
   },
 
   tick: function(time, delta){
