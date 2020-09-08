@@ -1,7 +1,7 @@
 
 const NOTE_TYPE = {
-  'h': 0.2, //hammered
-  's': 0.8, //sustained
+  'h': 0.3, //hammered
+  's': 0.5, //sustained
 };
 
 const FIGURES = {
@@ -43,11 +43,14 @@ class Sequencer {
     let time = 0;
     this.sequence.forEach(element => {
       let [note, figure, decTime = 's']  = element.split(' '); 
-
-      let dec = NOTE_TYPE[decTime] * 120 / this.tempo;
-  		const beatsPerSecond = 60.0 / this.tempo * FIGURES[figure];
-      this.instrument.playNote(FREQUENCIES[note], time, dec);
+      if (note !== '-'){
+        let dec = NOTE_TYPE[decTime] * 30 / this.tempo;
+        this.instrument.playNote(FREQUENCIES[note], time, dec);
+      }
+      const beatsPerSecond = 60.0 / this.tempo * FIGURES[figure];
       time += beatsPerSecond;
     });
   }
 }
+
+condicion ? verdadero : falso;
