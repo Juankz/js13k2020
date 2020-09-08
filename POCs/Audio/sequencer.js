@@ -52,5 +52,3 @@ class Sequencer {
     });
   }
 }
-
-condicion ? verdadero : falso;
