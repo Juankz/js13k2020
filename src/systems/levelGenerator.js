@@ -14,6 +14,9 @@ export default AFRAME.registerSystem('level-generator', {
     this.placeElements(blueprints[blueprintId]);
     this.el.emit('level-updated', blueprintId);
   },
+  restartLevel() {
+    this.restart = true;
+  },
   clearCurrentLevel: function() {
     this.doorsPool.retrieveAllEntities();
     this.robotsPool.retrieveAllEntities();
@@ -45,6 +48,7 @@ export default AFRAME.registerSystem('level-generator', {
         case 'p': //player
           const  player = document.getElementById('player');
           player.object3D.position.set(x, player.object3D.position.y, z);
+          player.components['player'].updateInitialPosition();
           player.setAttribute('collision-box', `x: ${x}; y: ${z}; w: 0.95; h:0.95`);
           break;
         case 'T': // Terminal

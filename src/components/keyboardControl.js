@@ -102,14 +102,6 @@ export default AFRAME.registerComponent('keyboard-controls', {
     this.collisionBox.y = this.collisionBoxPos.z;
 
     this.v.set(this.collisionBox.x + this.collisionBox.w/2, this.collisionBoxPos.y, this.collisionBox.y + this.collisionBox.h/2);
-
-    let diff = this.el.object3D.position.distanceToSquared(this.v);
-    // if(diff<0.05){
-    //   this.el.object3D.position.lerp(this.v, 0.1);
-    // }else if(diff<0.1){
-    //   this.el.object3D.position.lerp(this.v, 0.2);
-    // }else{
-    // }
     this.el.object3D.position.lerp(this.v, 0.4);
   },
 

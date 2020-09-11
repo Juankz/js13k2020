@@ -21,6 +21,8 @@ export default AFRAME.registerComponent('player-detection', {
     this.diff = new THREE.Vector3();
     this.lightDir = new THREE.Vector3();
     this.playerPos = new THREE.Vector3();
+    this.PlayerSpotted = false;
+    this.reactionTime = 0;
 
   },
   detectIfIntruderVisible: function () {
@@ -53,7 +55,7 @@ export default AFRAME.registerComponent('player-detection', {
     this.currentAngle = this.lightDir.angleTo(this.diff);
     return this.currentAngle < this.detectionAngle;
   },
-  tick: function() {
+  tick: function(time, delta) {
     let intruderInRange = this.detectIfIntruderInRange(this.player);
     intruderInRange |= this.detectIfIntruderInRange(this.playerHead.object3D);
     this.intruderInRange = intruderInRange
@@ -61,8 +63,13 @@ export default AFRAME.registerComponent('player-detection', {
       if (this.playerDetected) {
         this.lightSourceParams.color = {r: 1, g: 0.0, b: 0.0};
         this.robotEye.setAttribute('material', 'emissive: red');
+        this.reactionTime += delta;
+        if(this.reactionTime > delta*3 && !this.playerSpotted){
+          this.playerSpotted = true;
+          document.querySelector('a-scene').systems['game-manager'].onPlayerSpotted();
+        }
       }else{
-        // TODO: Just for testing. Remove later
+        this.playerSpotted = false;
         this.robotEye.setAttribute('material', 'emissive: white');
         this.lightSourceParams.color = {r: 1, g: 1, b: 1};
       }
