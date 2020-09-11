@@ -6,6 +6,7 @@ class RobotsPool extends Pool {
     const lightPos = new THREE.Vector3(0, 2, 1.4);
 
     const robot = document.createElement('a-entity');
+    robot.setAttribute('gameaudio', 'sequence: playerDetected');
     robot.classList.add('robot');
     robot.setAttribute('player-detection','')
     

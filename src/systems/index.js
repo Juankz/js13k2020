@@ -3,3 +3,4 @@ import './deviceSetup.js';
 import './gameManager.js';
 import './trigger.js';
 import './collisionSolver.js';
+import './sound.js'

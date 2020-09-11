@@ -4,7 +4,7 @@ const FORWARD = new THREE.Vector3(0, 0, -1);
 let print = false
 
 export default AFRAME.registerComponent('player-detection', {
-  dependencies: ['raycaster'],
+  dependencies: ['gameaudio','raycaster'],
   init: function() {
     this.instersectionHead = this.instersectionLevel = 0;
     this.playerDetected = false
@@ -66,6 +66,7 @@ export default AFRAME.registerComponent('player-detection', {
         this.reactionTime += delta;
         if(this.reactionTime > delta*3 && !this.playerSpotted){
           this.playerSpotted = true;
+          this.el.components['gameaudio'].playSound();
           document.querySelector('a-scene').systems['game-manager'].onPlayerSpotted();
         }
       }else{

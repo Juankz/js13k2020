@@ -12,3 +12,4 @@ import './rotationBehaviour.js'
 import './terminal.js'
 import './collisionBox.js'
 import './cameraBlink.js';
+import './sound.js'

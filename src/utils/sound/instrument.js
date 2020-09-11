@@ -27,7 +27,7 @@ class Instrument{
 
   setExponentialRampToValueAtTime(gains, time){
     gains.forEach(g => {
-      g.gain.exponentialRampToValueAtTime(0.1,time);
+      g.gain.exponentialRampToValueAtTime(g.gain.value*0.5,time);
       g.gain.setTargetAtTime(0.001, time, 0.001);
     });
   }
@@ -46,4 +46,6 @@ class Instrument{
 
   playNote(note, figure){
   }
-} 
+}
+
+export default Instrument;
