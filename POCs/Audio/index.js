@@ -4,6 +4,17 @@ function getAudioContext() {
   }
   return this.audioContext;
 }
+
+class Sound {
+  constructor(){
+    this.oscillators = []
+  }
+
+  createOscillator(number){
+    this.oscillators.push(new constext.oscillator());
+  }
+}
+
 function playSound(){
   let context = getAudioContext();  
   // creates oscillator to create the actual sound with the choosen note frequency
@@ -11,8 +22,8 @@ function playSound(){
   let o2 = context.createOscillator()
   let o3 = context.createOscillator()
   o.frequency.value = 440;
-  o2.frequency.value = 220;
-  o3.frequency.value = 110;
+  o2.frequency.value = 440/2;
+  o3.frequency.value = 440/4;
 
   let g = context.createGain() // creates gain to gracefully reduce the sound through time
   let g2 = context.createGain() 
@@ -37,9 +48,9 @@ function playSound(){
   // Reduces exponentially the sound, this gives a reallystic feeling
   // as the produced sound decreases the same way the sound of a pulled
   // guitar string would decrease.
-  g.gain.setTargetAtTime(0, context.currentTime, 0.25)
-  g2.gain.setTargetAtTime(0, context.currentTime, 0.25)
-  g3.gain.setTargetAtTime(0, context.currentTime, 0.25)
+  g.gain.setTargetAtTime(0, context.currentTime, 0.4)
+  g2.gain.setTargetAtTime(0, context.currentTime, 0.4)
+  g3.gain.setTargetAtTime(0, context.currentTime, 0.4)
 
   o.stop(context.currentTime + 0.5)
   o2.stop(context.currentTime + 0.5)
