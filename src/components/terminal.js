@@ -1,11 +1,15 @@
 import * as TerminalText from '../utils/terminal.js';
+import detectPremiumUser from '../utils/webMonetization.js';
 
 export default AFRAME.registerComponent('terminal', {
   dependencies: ['texture-material'],
 
   schema: {
     text: {default: '404 text not found'},
-    tutorial: {default: false}
+    tutorial: {default: false},
+    startAutomatically: {default: false},
+    monetization: {default: false},
+    extraInformation: {default: false}
   },
 
   init: function() {
@@ -15,10 +19,35 @@ export default AFRAME.registerComponent('terminal', {
     this.drawnText = '';
     this.framesBetweenCharacters = 1; 
     this.framesBetweenLines = 5;
+    this.started = false;
     this.canvasEl = this.el.components['texture-material'].canvasEl;
     if(this.data.tutorial) {
       this.loadDeviceInstructions();
       document.querySelector('a-scene').systems['device-setup'].el.addEventListener('device-info-updated', this.loadDeviceInstructions.bind(this))
+    }
+    if(this.data.monetization) {
+      let premiumText = this.fullText;
+      this.canvasEl.bgColor = 'cyan';
+      this.canvasEl.font_size = 30;
+      this.canvasEl.text_lineheight = 40;
+      this.framesBetweenLines = 1;
+      this.fullText = `Can't decrypt data.\nError 404\nKey W3B M0N3T1Z4T10N not found`;
+      this.canvasEl.draw(this.canvasEl.ctx);
+      detectPremiumUser().then(()=>{
+        this.fullText = `Decrypting data with key W3B M0N3T1Z4T10N.......\n`;
+        this.fullText += premiumText;  
+      })
+    }
+    if(this.data.extraInformation) {
+      this.canvasEl.font_size = 40;
+      this.canvasEl.text_lineheight = 50;
+      this.framesBetweenLines = 1;
+      this.canvasEl.draw(this.canvasEl.ctx);
+
+    }
+    if(this.data.startAutomatically){
+      this.el.querySelector('.trigger').object3D.visible = false;
+      this.started = true;
     }
   },
 
@@ -43,9 +72,14 @@ export default AFRAME.registerComponent('terminal', {
     }
   },
 
+  start: function() {
+    if(this.started) return;
+    this.started = true;
+  },
+
   tick: function() {
     this.canvasEl.getTexture().needsUpdate = true;
-    this.processText();
+    if(this.started) this.processText();
     this.canvasEl.draw(this.canvasEl.ctx);
   }
 });

@@ -10,7 +10,7 @@ class FloorTexture extends CanvasTexture {
     This is a new line`;
     this.drawnText = '';
     this.textLines = [];
-    this.font_size = 60; 
+    this.font_size = 50; 
     this.margin = 20;
     this.text_margin = 20;
     this.text_lineheight = this.font_size + 10;
@@ -24,13 +24,15 @@ class FloorTexture extends CanvasTexture {
     ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     ctx.fillStyle = this.textColor;
     ctx.font = `${this.font_size}px monospace`;
-    let cursorX, cursorY = this.margin;
+    let cursorX = this.margin + this.text_margin;
+    let cursorY = this.margin + this.text_margin;
     
     for (let i = 0; i < this.textLines.length; i++){
       ctx.fillText(this.textLines[i], this.margin + this.text_margin, this.text_margin + this.text_lineheight*(i+1));
-      cursorX = (this.textLines[i].length ) * this.font_size*0.65 + this.text_margin+this.margin;
+      cursorX = (this.textLines[i].length - 1 ) * this.font_size*0.65 + this.text_margin+this.margin;
     }
-    cursorY = this.textLines.length*this.text_lineheight - this.text_margin - 5;
+    cursorY = (this.textLines.length - 1)*this.text_lineheight + this.text_margin + this.margin;
+    cursorY = Math.max(cursorY, this.margin + this.text_margin)
 
     if(this.count <= this.cursorBlinkFrames){
       this.count++
