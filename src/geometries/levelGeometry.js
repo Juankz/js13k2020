@@ -31,7 +31,7 @@ AFRAME.registerGeometry('level', {
           geometries.push(this.newColumn(x, z, 3));
           break;
         case 'o':
-          geometries.push(this.newColumn(x, z, 1.3));
+          geometries.push(this.newColumn(x, z, 1.4));
           break;
         case '\n':
           z++;
