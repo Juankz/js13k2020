@@ -30,23 +30,24 @@ export default AFRAME.registerComponent('player-detection', {
     if (intersection) {
       this.instersectionHead = intersection.distance;
       let obstacles = document.querySelectorAll('.obstacles');
-      console.log(obstacles)
+      let distances = [];
       for (let i = 0; i< obstacles.length; i++){
         intersection = this.raycaster.getIntersection(obstacles.item(i));
         if (intersection) {
-          this.instersectionLevel = intersection.distance;
-  
-          if (this.instersectionHead < this.instersectionLevel){
-            this.playerDetected = true
-          }else{
-            this.playerDetected = false
-          } 
-        }else{
-          this.playerDetected = true
+          distances.push(intersection.distance);
         }
       }
-      console.log(intersection)
-      console.log(this.instersectionHead)
+      let isBehindAnObstacle = distances.some(distance => distance < this.instersectionHead);
+      
+      if(distances.length == 0){
+        this.playerDetected = true
+      }else if(!isBehindAnObstacle){
+        console.log(distances)
+        console.log(this.instersectionHead)
+        this.playerDetected = true
+      }else{
+        this.playerDetected = false
+      }
     }else{
       this.playerDetected = false
     }
@@ -74,7 +75,7 @@ export default AFRAME.registerComponent('player-detection', {
         if(this.reactionTime > delta*3 && !this.playerSpotted){
           this.playerSpotted = true;
           this.el.components['gameaudio'].playSound();
-          // document.querySelector('a-scene').systems['game-manager'].onPlayerSpotted();
+          document.querySelector('a-scene').systems['game-manager'].onPlayerSpotted();
         }
       }else{
         this.playerSpotted = false;
