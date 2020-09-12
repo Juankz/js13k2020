@@ -8,16 +8,16 @@ const STATES = {
 export default AFRAME.registerComponent('translation-behaviour', {
   schema: {
     default: {
-      behaviour: BEHAVIOURS.TRANSLATION,
       target: new THREE.Vector3(5, 0, 0),
       await: 3000,
-      delay: 0
+      delay: 0,
+      speed: 3,
     }
   },
   init: function() {
     this.state = STATES.INSPECTING;
     this.previousState = STATES.INSPECTING;
-    this.speed = 3;
+    this.speed = this.data.speed? this.data.speed: 3;
     this.initialPosition = this.el.object3D.position.clone();
     this.finalPosition = this.el.object3D.position.clone().add(this.data.target);
     this.temp = new THREE.Vector3();
