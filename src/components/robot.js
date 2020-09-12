@@ -29,17 +29,24 @@ export default AFRAME.registerComponent('player-detection', {
     let intersection = this.raycaster.getIntersection(this.playerHead);
     if (intersection) {
       this.instersectionHead = intersection.distance;
-      intersection = this.raycaster.getIntersection(this.level);
-      if (intersection) {
-        this.instersectionLevel = intersection.distance;
-        if (this.instersectionHead < this.instersectionLevel){
-          this.playerDetected = true
+      let obstacles = document.querySelectorAll('.obstacles');
+      console.log(obstacles)
+      for (let i = 0; i< obstacles.length; i++){
+        intersection = this.raycaster.getIntersection(obstacles.item(i));
+        if (intersection) {
+          this.instersectionLevel = intersection.distance;
+  
+          if (this.instersectionHead < this.instersectionLevel){
+            this.playerDetected = true
+          }else{
+            this.playerDetected = false
+          } 
         }else{
-          this.playerDetected = false
-        } 
-      }else{
-        this.playerDetected = true
+          this.playerDetected = true
+        }
       }
+      console.log(intersection)
+      console.log(this.instersectionHead)
     }else{
       this.playerDetected = false
     }
@@ -67,7 +74,7 @@ export default AFRAME.registerComponent('player-detection', {
         if(this.reactionTime > delta*3 && !this.playerSpotted){
           this.playerSpotted = true;
           this.el.components['gameaudio'].playSound();
-          document.querySelector('a-scene').systems['game-manager'].onPlayerSpotted();
+          // document.querySelector('a-scene').systems['game-manager'].onPlayerSpotted();
         }
       }else{
         this.playerSpotted = false;
