@@ -10,7 +10,8 @@ export default AFRAME.registerComponent('rotation-behaviour', {
       behaviour: BEHAVIOURS.ROTATION,
       targets: [Math.PI],
       await: 5000,
-      delay: 0
+      delay: 0,
+      speed: Math.PI
     }
   },
   init: function() {
@@ -21,6 +22,7 @@ export default AFRAME.registerComponent('rotation-behaviour', {
     this.elapsedTime = this.data.await - this.data.delay;
     this.targetRot = this.initialRotation + this.currentTarget;
     this.targetRot = this.clamp(this.targetRot);
+    this.speed = this.data.speed ? this.data.speed : Math.PI;
   },
   rotate: function() {
 
@@ -42,9 +44,9 @@ export default AFRAME.registerComponent('rotation-behaviour', {
         }
         break;
       case STATES.MOVING:
-          this.el.object3D.rotation.y += Math.PI * delta*0.001;
+          this.el.object3D.rotation.y += this.speed * delta * 0.001;
           this.el.object3D.rotation.y = this.clamp(this.el.object3D.rotation.y);
-        if(Math.abs(this.el.object3D.rotation.y - this.targetRot) < 0.1){
+        if(Math.abs(this.el.object3D.rotation.y - this.targetRot) < this.speed * delta * 0.001){
           this.state = STATES.INSPECTING;
           this.previousState = STATES.MOVING
         }
