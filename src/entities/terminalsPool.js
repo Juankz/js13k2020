@@ -17,9 +17,9 @@ class terminalsPool extends Pool {
     const trigger = document.createElement('a-entity');
     trigger.classList.add('trigger');
     trigger.setAttribute('material', 'shader: flat; color: white; transparent: true; opacity: 0')
-    trigger.setAttribute('geometry', 'primitive: box; width: 3; height: 0.1; depth: 3;');
+    trigger.setAttribute('geometry', 'primitive: box; width: 3; height: 0.1; depth: 4;');
     trigger.setAttribute('trigger', '');
-    trigger.object3D.position.set(0, -1.6,1.5);
+    trigger.object3D.position.set(0, -1.6,2);
     trigger.addEventListener('trigger-activated', terminal.components['terminal'].start.bind(terminal.components['terminal']));
 
     terminal.appendChild(trigger);
