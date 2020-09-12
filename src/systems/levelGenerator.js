@@ -3,6 +3,7 @@ import DoorsPool from '../entities/doorsPool.js';
 import RobotsPool from '../entities/robotsPool.js';
 import TerminalsPool from '../entities/terminalsPool.js';
 import MovingWallPool from '../entities/movingWallPool.js';
+import CapsulesPool from '../entities/capsulesPool.js';
 
 
 export default AFRAME.registerSystem('level-generator', {
@@ -12,6 +13,7 @@ export default AFRAME.registerSystem('level-generator', {
     this.robotsPool = new RobotsPool();
     this.movingWallPool = new MovingWallPool();
     this.terminalsPool = new TerminalsPool();
+    this.capsulesPool = new CapsulesPool();
     this.generateLevel(blueprintId);
     this.placeElements(blueprints[blueprintId]);
     this.el.emit('level-updated', blueprintId);
@@ -24,6 +26,7 @@ export default AFRAME.registerSystem('level-generator', {
     this.movingWallPool.retrieveAllEntities();
     this.robotsPool.retrieveAllEntities();
     this.terminalsPool.retrieveAllEntities();
+    this.capsulesPool.retrieveAllEntities();
     if(this.level) {level.components['collision-box'].boxes = []}
   },
   generateLevel: function(blueprintId) {
@@ -51,6 +54,10 @@ export default AFRAME.registerSystem('level-generator', {
           const door = this.doorsPool.requestEntity();
           door.object3D.position.set(x, 1.5, z);
           break;
+        case '|': //capsule
+            const capsule = this.capsulesPool.requestEntity();
+            capsule.object3D.position.set(x, 0.25, z);
+            break;
         case 'W': //Moving wall
           const mw = this.movingWallPool.requestEntity();
           const mwData =  blueprint.movingWalls[wallId];

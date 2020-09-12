@@ -3,6 +3,7 @@ import PositionMarkerTexture from '../utils/canvasTextures/positionMarkerTexture
 import TerminalTexture from '../utils/canvasTextures/terminalTexture.js';
 import WallTexture from '../utils/canvasTextures/wallTexture.js';
 import DoorTexture from '../utils/canvasTextures/doorTexture.js';
+import CapsuleTexture from '../utils/canvasTextures/capsuleTexture.js';
 
 AFRAME.registerComponent('texture-material', {
   dependencies: ['geometry'],
@@ -40,6 +41,19 @@ AFRAME.registerComponent('texture-material', {
         params.map = new PositionMarkerTexture().getTexture();
         this.material = this.el.getOrCreateObject3D('mesh').material = new THREE.MeshBasicMaterial(params);
         break;
+      case "capsule":
+          params.map = new CapsuleTexture().getTexture();
+          const capsuleMaterial = new THREE.MeshStandardMaterial({color: 'gray', map: new WallTexture().getTexture()})
+          let capsuleMeshMaterial = [
+            capsuleMaterial,
+            capsuleMaterial,
+            new THREE.MeshBasicMaterial(params),
+            capsuleMaterial,
+            capsuleMaterial,
+            capsuleMaterial
+          ]
+          this.material = this.el.getOrCreateObject3D('mesh').material = capsuleMeshMaterial;
+          break;
       case "terminal":
           this.canvasEl = new TerminalTexture();
           params.map = this.canvasEl.getTexture();
