@@ -47,7 +47,7 @@ export default AFRAME.registerComponent('translation-behaviour', {
   move: function(target, delta) {
     this.temp.copy(target).sub(this.el.object3D.position).normalize();
     this.el.object3D.position.add(this.temp.multiplyScalar(this.speed*delta*0.001))
-    if(this.el.object3D.position.distanceToSquared (target) < 1){
+    if(this.el.object3D.position.distanceToSquared (target) < 0.001){
       this.previousState = this.state;
       this.state = STATES.INSPECTING;
     }
