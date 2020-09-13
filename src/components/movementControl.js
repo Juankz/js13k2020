@@ -1,7 +1,10 @@
+const STAND_HEIGHT = 1.6;
+const CROUCH_HEIGHT = 0.8;
 export default AFRAME.registerComponent('movement-control', {
   dependencies: ['raycaster'],
   init: function(){
     this.player = document.getElementById('player');
+    this.camera = document.getElementById('camera');
     this.v = new THREE.Vector3();
     this.floor = document.querySelector('.floor');
     this.positionMarker = document.getElementById('position-marker');
@@ -26,7 +29,20 @@ export default AFRAME.registerComponent('movement-control', {
         this.movePlayer(event.detail.intersection.point)
       }
     });
+    document.getElementById('crouchButton').addEventListener('click', this.toggleCrouch.bind(this));
   },
+
+  toggleCrouch: function() {
+    // TODO: Add interpolation
+    if (this.crouchedDown) {
+      this.camera.object3D.position.y = STAND_HEIGHT;
+      this.crouchedDown = false;
+    }else{
+      this.camera.object3D.position.y = CROUCH_HEIGHT;
+      this.crouchedDown = true;
+    }
+  },
+
   tick: function() {
     if(this.raycaster) {
       if (this.target.classList.contains('floor')){

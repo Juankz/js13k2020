@@ -52,12 +52,20 @@ export default AFRAME.registerSystem('device-setup', {
     this.camera.appendChild(cursor);
   },
 
+  addCrouchButton() {
+    document.querySelector('.ui').style.display = 'inline-block';
+  },
+
   addKeyboardControl: function() {
     this.player.setAttribute('keyboard-controls','');
   },
 
   removeCursor: function() {
     document.getElementById('cursor').remove();
+  },
+
+  removeCrouchButton() {
+    document.querySelector('.ui').style.display = 'none';
   },
 
   removeHand: function(which){
@@ -78,6 +86,7 @@ export default AFRAME.registerSystem('device-setup', {
       this.removeHand('left');
     } else if(this.previousDevice == DEVICES.mobile){
       this.removeCursor();
+      this.removeCrouchButton();
       this.el.setAttribute('vr-mode-ui', 'enabled: true');
     } else {
       this.removeKeyboardControl();
@@ -92,6 +101,7 @@ export default AFRAME.registerSystem('device-setup', {
       this.addHand('left');
     }else if(this.isMobile()){
       this.addCursor()
+      this.addCrouchButton();
       this.el.setAttribute('vr-mode-ui', 'enabled: false');
     }else{ //Desktop
       this.addKeyboardControl();

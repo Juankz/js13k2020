@@ -3,14 +3,25 @@
     <meta name="monetization" content="$ilp.uphold.com/3wafYxRePpyi">
     <title>Ned Snow</title>
     <script src="https://js13kgames.com/webxr-src/2020/aframe.js"></script>
+    <style>
+      .ui {
+        position: absolute;
+        z-index: 2;
+        bottom: 10px;
+        right: 10px;
+        font-size: 30px;
+        display: none;
+      }
+    </style>
   </head>
   <body>
+    <button class="ui" id="crouchButton">Crouch</button>
     <a-scene renderer="antialias: true" game-manager level-generator gameaudio>
       <a-assets>
         <a-mixin id="cursor-config" cursor="fuse: false;" position="0 0 -1" geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" material="color: white; shader: flat"></a-mixin>
         <a-mixin id="movement-control" raycaster="far: 3; autoRefresh: true; objects: .floor" movement-control></a-mixin>
       </a-assets>
-      <a-entity gameaudio="sequence: proof; volume: 0.1; autoplay: true; tempo: 40; loop: true;"></a-entity>
+      <a-entity id="bg-music" gameaudio="sequence: proof; volume: 0.1; autoplay: true; tempo: 40; loop: true;"></a-entity>
       <a-plane class="floor" width="100" height="100" rotation="-90 0 0" texture-material="texture: floor; repeat: 100 100" shadow="cast: false, receive: true"></a-plane>
       <a-entity id="position-marker" position-marker geometry="primitive: circle; radius: 0.5;" rotation="-90 0 0" position="0 0.1 -2" texture-material="texture: position-marker; transparent: true;"></a-entity>
 
