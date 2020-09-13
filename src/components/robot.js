@@ -66,6 +66,8 @@ export default AFRAME.registerComponent('player-detection', {
     intruderInRange |= this.detectIfIntruderInRange(this.playerHead.object3D);
     this.intruderInRange = intruderInRange
     if(intruderInRange) {
+      this.raycastWrapper.lookAt(this.playerHead.object3D.getWorldPosition(ORIGIN));
+      this.detectIfIntruderVisible()
       if (this.playerDetected) {
         this.lightSourceParams.color = {r: 1, g: 0.0, b: 0.0};
         this.robotEye.setAttribute('material', 'emissive: red');
@@ -80,8 +82,6 @@ export default AFRAME.registerComponent('player-detection', {
         this.robotEye.setAttribute('material', 'emissive: white');
         this.lightSourceParams.color = {r: 1, g: 1, b: 1};
       }
-      this.raycastWrapper.lookAt(this.playerHead.object3D.getWorldPosition(ORIGIN));
-      this.detectIfIntruderVisible()
     }else{
       print = false;
       this.robotEye.setAttribute('material', 'emissive: white');

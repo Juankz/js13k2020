@@ -8,7 +8,7 @@ class MovingWallPool extends Pool {
     mw.setAttribute('height', 3);
     mw.setAttribute('width', 3);
     mw.setAttribute('shadow', 'cast: true;');
-    document.querySelector('a-scene').appendChild(mw);
+    document.querySelector('#level').appendChild(mw);
     return mw;
   }
 }
