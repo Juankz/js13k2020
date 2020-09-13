@@ -1,3 +1,5 @@
+const SEQUENCES = ['vertigo', 'silence', 'proof'];
+
 export default AFRAME.registerSystem('game-manager', {
   init: function() {
     window.onload = function() {
@@ -8,6 +10,8 @@ export default AFRAME.registerSystem('game-manager', {
   onGoalReached: function() {
     this.level++;
     this.blinkAndLoadLevel();
+    let newSeq = SEQUENCES[Math.floor(Math.random()*3)];
+    document.querySelector('#bg-music').setAttribute('gameaudio', `sequence: ${newSeq}; volume: 0.1; autoplay: true; tempo: 40; loop: true;`);
   },
   /* Give the playter a second to process why he got caught.
   Then restart the level  */
