@@ -62,10 +62,9 @@ Find Ned Snow!
 Search for more terminals
 But don't let them see you!
 `,
-
       },
       {
-        text: terminalData.unencryptedData[0],
+        text: terminalData.unencryptedData[0]
       }
     ],
     robots: [
@@ -177,18 +176,9 @@ But don't let them see you!
     x---o-------------x
     x---o---0---------x
     x---o-------------x
-    x-t-o-------------x
-    xxxxxxx---oooooo-ox
-    ------x-----------x
-    ------x---------g-x
-    ------xxxxxxxxxxdxx
+    x-g-o-------------x
+    xxdxxxxxxxxxxxxxxxx
     `,
-    terminals: [
-      {
-        text: terminalData.unencryptedData[1],
-        rotation: Math.PI
-      }
-    ],
     robots: [
       {
         behaviour: BEHAVIOURS.TRANSLATION,
@@ -225,7 +215,7 @@ But don't let them see you!
       `,
       terminals: [
         {
-          text: terminalData.unencryptedData[2],
+          text: terminalData.unencryptedData[1],
           rotation: Math.PI*2
         },
         {
@@ -276,7 +266,7 @@ But don't let them see you!
     xxxxxxxxxxxxxxxxxxxxx
     `,
     terminals: [
-      {text: terminalData.unencryptedData[3]}
+      {text: terminalData.unencryptedData[2]}
     ],
     robots: [
       {
@@ -299,8 +289,8 @@ But don't let them see you!
     dp------------------------$x
     xooooooo---xx--------------x
     x------o--------xxxoo---xxxx
-    x------o------------o---x
-    x------oo-----------o---x
+    x------o--------o---o---x
+    x------oo-------o---o---x
     xxxxx-W-----------------x
     ----x-------------W-----x
     ----x-------------------x
@@ -347,8 +337,22 @@ But don't let them see you!
   // Level 10
 
   {
-    level: terminalData.blueprint,
-    terminals: [{text: terminalData.text_200}]
+    level:
+    `
+    xxxxxxxxxxxxx
+    x-----------x
+    x-----------x
+    x-|-|-|-|--tx
+    x-----------x
+    dp----------x
+    x-----------x
+    x-|-|-|-|--$x
+    x-----------x
+    x---------g-x
+    xxxxxxxxxxdxx
+
+    `,
+    terminals: [{text: terminalData.text_200}, {text: terminalData.encryptedData[3]}]
   },
   
   // Level 11
