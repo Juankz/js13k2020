@@ -12,12 +12,11 @@ export default AFRAME.registerComponent('movement-control', {
     this.el.addEventListener('raycaster-intersection', e => {
       this.raycaster = e.srcElement;
       this.target = e.detail.els[0];
-      this.positionMarker.components['position-marker'].show()
-    }); 
-    this.el.addEventListener('raycaster-intersection-cleared', e => {
-      this.raycaster = null;
-      this.target = null;
-      this.positionMarker.components['position-marker'].hide()
+      if(this.target.classList.contains('floor')){
+        this.positionMarker.components['position-marker'].show()
+      }else{
+        this.positionMarker.components['position-marker'].hide()
+      }
     });
     this.el.addEventListener('mousedown', (event)=>{
       if (event.detail.intersectedEl.classList.contains('floor')){
@@ -45,29 +44,27 @@ export default AFRAME.registerComponent('movement-control', {
 
   tick: function() {
     if(this.raycaster) {
-      if (this.target.classList.contains('floor')){
-        let intersection = this.raycaster.components.raycaster.getIntersection(this.target);
-        if (!intersection) { return; }
+      let intersection = this.raycaster.components['raycaster'].getIntersection(this.floor)
+      if(intersection){
+        this.positionMarker.components['position-marker'].show()
         this.updateMarker(intersection.point);
       }
     }
-    // if(this.collisionBox){
-    //   this.v.set(this.collisionBox.x + this.collisionBox.w/2, this.player.object3D.position.y, this.collisionBox.y + this.collisionBox.h/2);
-    // }
   },
   updateMarker(pos) {
     this.positionMarker.object3D.position.set(pos.x, pos.y + 0.1, pos.z)
   },
   setBoxPosition(pos){
-  //   this.collisionBox = this.player.components['collision-box'];
-  //   this.collisionBox.x = pos.x;
-  //   this.collisionBox.y = pos.z;
-  //   this.player.object3D.position.lerp(this.v, 0.4);
-  let player_pos = this.player.object3D.position;
-  player_pos.set(pos.x, player_pos.y, pos.z)
+    this.collisionBox = this.player.components['collision-box'];
+    this.collisionBox.x = pos.x;
+    this.collisionBox.y = pos.z;
 },
-  movePlayer(pos) {
-    document.getElementById('camera-blink').components['camera-blink'].animate();
-    setTimeout(()=>{this.setBoxPosition(pos)},100)
+movePlayer(pos) {
+  document.getElementById('camera-blink').components['camera-blink'].animate();
+  this.setBoxPosition(pos)
+  setTimeout(()=>{
+    let player_pos = this.player.object3D.position;
+    player_pos.set(this.collisionBox.x, player_pos.y, this.collisionBox.y)
+  },100)
   }
 });
