@@ -72,6 +72,10 @@ export default AFRAME.registerComponent('collision-box', {
     }
   },
 
+  pause: function(){
+    this.system.unregisterEntity(this.el);
+  },
+
   tick: function() {
     if (!this.data.multipleBoxes) {
       this.c.set(this.x + this.w*0.5, this.y + this.h*0.5);
