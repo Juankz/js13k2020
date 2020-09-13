@@ -18,6 +18,7 @@ export default class Pool {
       el = this.createEntity()
     }
     this.usedEls.push(el);
+    el.object3D.visible = true;
     return el;
   }
 
@@ -28,8 +29,9 @@ export default class Pool {
       return;
     }
     this.usedEls.splice(index, 1);
-    entityEl.pause();
+    entityEl.object3D.position.y = 1000;
     entityEl.object3D.visible = false;
+    entityEl.pause();
     this.availableEls.push(entityEl);
   }
 
