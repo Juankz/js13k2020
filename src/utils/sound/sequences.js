@@ -1,7 +1,13 @@
 const Sequences = {
   playerDetected: [
-    'C#1 w s'
+    'C#1,D#1,A1 w s'
   ],
+
+  background: [
+    'C1 w s', 'D1 w s',
+    'C1 w s', 'D1 w s',
+  ],
+  
   s1 : [
     'C2 es',
     'A#2 es',
@@ -28,7 +34,7 @@ const Sequences = {
     'F2 q h', 'D2 e h',   'D#2 e h'
   ],
   
-  s4 : [
+  background1 : [
     'B3 h s', '- h s',   'A#3 h s',  '- h s', 
     'B3 e h', '- e',     'A#3 e',  'F#3 e h',
     'D3 q h', 'D#3 es',   'A#2 es',

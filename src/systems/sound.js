@@ -31,12 +31,17 @@ export default AFRAME.registerSystem('gameaudio', {
     let time = 0;
     sequence.forEach(element => {
       let [note, figure, decTime = 's']  = element.split(' '); 
-      if (note !== '-'){
-        let dec = NOTE_TYPE[decTime] * 30 / tempo;
-        instrument.playNote(FREQUENCIES[note], time, dec, volume);
-      }
+      let notes = note.split(',');
+      console.log(notes)
+      notes.forEach(n => {
+        if (note !== '-'){
+          let dec = NOTE_TYPE[decTime] * 60 / tempo;
+          instrument.playNote(FREQUENCIES[n], time, dec, volume);
+        }
+      });
       const beatsPerSecond = 60.0 / tempo * FIGURES[figure];
       time += beatsPerSecond;
     });
+    return time;
   }
 })
