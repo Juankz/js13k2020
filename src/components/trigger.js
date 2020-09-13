@@ -1,7 +1,7 @@
 export default AFRAME.registerComponent('trigger', {
   dependencies: ['material'],
   init: function() {
-    console.log(this.el.components.material);
+    
     this.system.registerMe(this.el)
     this.el.components.geometry.geometry.computeBoundingBox();
   },

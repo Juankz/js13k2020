@@ -42,8 +42,6 @@ export default AFRAME.registerComponent('player-detection', {
       if(distances.length == 0){
         this.playerDetected = true
       }else if(!isBehindAnObstacle){
-        console.log(distances)
-        console.log(this.instersectionHead)
         this.playerDetected = true
       }else{
         this.playerDetected = false

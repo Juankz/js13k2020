@@ -32,7 +32,6 @@ export default AFRAME.registerSystem('gameaudio', {
     sequence.forEach(element => {
       let [note, figure, decTime = 's']  = element.split(' '); 
       let notes = note.split(',');
-      console.log(notes)
       notes.forEach(n => {
         if (note !== '-'){
           let dec = NOTE_TYPE[decTime] * 60 / tempo;

@@ -60,7 +60,6 @@ export default AFRAME.registerSystem('collision-box', {
   registerPlayer: function(el) {
     this.player = el;
     this.playerBox = el.components['collision-box'];
-    console.log(this)
   },
 
   unregisterEntity: function(el){
