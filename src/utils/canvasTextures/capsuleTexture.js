@@ -11,8 +11,8 @@ class WallTexture extends CanvasTexture {
     let h = ctx.canvas.height
     
     var grd = ctx.createLinearGradient(0, 0, 0, h);
-    grd.addColorStop(0, 'green');
-    grd.addColorStop(1, 'cyan');
+    grd.addColorStop(0, 'orange');
+    grd.addColorStop(1, 'red');
     ctx.fillStyle = 'black';
     ctx.fillRect(0, 0, w, h);
     ctx.strokeStyle = grd;
