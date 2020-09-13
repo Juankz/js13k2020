@@ -42,6 +42,24 @@ const Sequences = {
     'B3 e h', 'F3 e',     'A#3 e',  'F#3 e h',
     'D3 q h', 'D#3 es',   'A#2 es', 'F#2 q h',
     'F2 q h', 'D2 e',     'D#2 e'
+  ],
+
+  vertigo : [
+    'G3 h', 'A#3 h', 'D3 h', 'G3 h', 'A#3 h', 'C#3 h',
+    'F#3 h', 'A#3 h', 'D3 h', 'G3 h', 'A#3 h', 'C#3 h',
+    'D1 h', 'G1 h', 'A#2 h', 'D2 h', 'C#3 h',
+  ],
+
+  silence : [
+    'F1,A#1,F2 h s', 'E3 h', 'F3 h', 'D3 h',
+    'F3 h', 'E3 h', 'F3 h', 'D3 h',
+    'G2 q', 'A2 q', 'A#2 q', 'G2 q', 'C#3 h'
+  ],
+
+  proof : [
+      'D3 h', 'G3 h',  'D3 h', 'F#3 h',
+      'D2 h', 'D#2 h', 'C#2 h', 'D2 h',
+      'A1 h', 'A#1 h', 'G1 w'
   ]
 }
 
