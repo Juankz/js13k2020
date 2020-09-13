@@ -19,7 +19,8 @@ Stand in front of a terminal
 to interact with it.
 Turn in real life.
 Point at the floor and tap
-Tap & hold to crouch/stand.
+to move. Use the button 
+to crouch/stand.
 Can you reach the door? ->`;
 const tutorial_desktop = 
 `Instructions:
