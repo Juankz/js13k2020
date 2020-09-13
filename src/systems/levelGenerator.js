@@ -53,6 +53,7 @@ export default AFRAME.registerSystem('level-generator', {
         case 'd': //doors
           const door = this.doorsPool.requestEntity();
           door.object3D.position.set(x, 1.5, z);
+          door.setAttribute('collision-box', `x: ${x-0.5}; y: ${z-0.5};`);
           break;
         case '|': //capsule
             const capsule = this.capsulesPool.requestEntity();
@@ -89,7 +90,6 @@ export default AFRAME.registerSystem('level-generator', {
           if(blueprint.terminals[terminalId].rotation){
             terminal.object3D.rotation.y = blueprint.terminals[terminalId].rotation;
           }
-          terminal.play();
           terminalId++;
           break;
         case 'g': //Goal
