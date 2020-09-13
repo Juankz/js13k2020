@@ -8,7 +8,11 @@ window.addEventListener('load', ()=>{
   setTimeout(()=>{
     document.querySelector('a-scene').setAttribute('stats','')        
     let controllers = []
-    // How to use:
+    // Skip to Level
+    // document.querySelector('a-scene').systems['game-manager'].level = 6;
+    // document.querySelector('a-scene').systems['game-manager'].blinkAndLoadLevel();
+    //
+    // Dat GUI:
     // let player = document.querySelector('#player');
     // gui.add({label: 'Player'}, 'label')
     // controllers.push(gui.add(player.object3D.position, 'x'));
