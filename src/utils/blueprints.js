@@ -166,13 +166,13 @@ But don't let them see you!
     dp--o--o----------x
     x---oooo--oooo----x
     x------------o----x
-    x------------o----x
+    x------------o--o-x
     xxxxooooooo--o----x
-    x---o--o--o--o----x
+    x---o--o--o--o-o--x
     x---oooo--oooo----x
     x-----------------x
     x-----------------x
-    x---ooo---ooooxxoxx
+    x---ooo---oooooooxx
     x---o-------------x
     x---o-------------x
     x---o---0---------x
