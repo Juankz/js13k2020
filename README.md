@@ -1,6 +1,7 @@
-# Js13k2020
+# Ned Snow
 
-A Web VR game for js13kgames 2020
+A stealth Web VR game for js13kgames 2020. You infiltrate a prison guarded by robots.
+I wrote an article about this game: https://dev.to/juankz/ned-snow-a-webvr-game-under-13kb-5d75
 
 ### Requirements
 - Node.js installed (v12.18 or greater)

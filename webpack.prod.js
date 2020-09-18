@@ -11,7 +11,7 @@ module.exports = merge(common, {
       frontShell: 'ls',
       initialFile: './dist',
       endPath: './build',
-      zipName: 'SearchingForNed.zip',
+      zipName: 'NedSnow.zip',
       behindShell: "echo 'File size: ' && stat --printf='%s' build/*"
     })
   ]
